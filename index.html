@@ -102,13 +102,13 @@
 
         <div class="category">🛠 Утилиты</div>
         
-        <div class="app-card disabled" onclick="showComingSoon()">
+        <!-- Генератор паролей (исправлено) -->
+        <div class="app-card" onclick="openApp('https://juvenalshaeffer-art.github.io/pswrd-generator/')">
             <div class="app-icon">🔐</div>
             <div class="app-info">
                 <div class="app-title">Генератор паролей</div>
-                <div class="app-desc">Скоро</div>
+                <div class="app-desc">Создавай надёжные пароли</div>
             </div>
-            <span class="status coming">Скоро</span>
         </div>
 
         <div class="footer">
@@ -125,16 +125,14 @@
         }
 
         /**
-         * Открывает приложение внутри Telegram
-         * Используем window.location.href — это работает в WebView
+         * Открывает приложение внутри Telegram WebView
          */
         function openApp(url) {
-            // Просто меняем location — это останется в том же WebView
-            window.location.href = url;
+            window.location.href = url.trim();
         }
 
         /**
-         * Показывает сообщение "Скоро"
+         * Показывает сообщение "Скоро" (оставлено на случай будущих кнопок)
          */
         function showComingSoon() {
             if (tg) {
