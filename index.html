@@ -14,19 +14,13 @@
             min-height: 100vh;
             padding: 16px;
             line-height: 1.5;
-            cursor: default;
         }
         .container { max-width: 400px; margin: 0 auto; }
         
-        /* Header */
-        .header {
-            text-align: center;
-            padding: 20px 0 30px;
-        }
+        .header { text-align: center; padding: 20px 0 30px; }
         .header h1 { font-size: 24px; margin-bottom: 8px; }
         .header p { color: var(--tg-theme-hint-color, #999); font-size: 14px; }
         
-        /* App Card */
         .app-card {
             background: var(--tg-theme-secondary-bg-color, #fff);
             border-radius: 16px;
@@ -44,90 +38,47 @@
         }
         .app-card:active { transform: scale(0.98); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
         .app-card.disabled { opacity: 0.6; cursor: not-allowed; }
-        .app-card.disabled:active { transform: none; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
         
         .app-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            background: var(--tg-theme-bg-color, #f0f0f0);
+            width: 48px; height: 48px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; background: var(--tg-theme-bg-color, #f0f0f0);
             flex-shrink: 0;
         }
         .app-info { flex: 1; min-width: 0; }
         .app-title { font-weight: 600; font-size: 16px; margin-bottom: 2px; }
         .app-desc { font-size: 13px; color: var(--tg-theme-hint-color, #999); }
         .app-tag {
-            font-size: 11px;
-            padding: 2px 8px;
-            border-radius: 8px;
+            font-size: 11px; padding: 2px 8px; border-radius: 8px;
             background: var(--tg-theme-button-color, #3390ec);
             color: var(--tg-theme-button-text-color, #fff);
             margin-left: 8px;
         }
         
-        /* Categories */
         .category {
-            font-size: 14px;
-            font-weight: 600;
-            margin: 24px 0 12px;
-            padding-left: 4px;
-            color: var(--tg-theme-hint-color, #999);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-size: 14px; font-weight: 600; margin: 24px 0 12px;
+            padding-left: 4px; color: var(--tg-theme-hint-color, #999);
+            text-transform: uppercase; letter-spacing: 0.5px;
         }
         
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 30px 0 20px;
-            color: var(--tg-theme-hint-color, #999);
-            font-size: 12px;
-        }
+        .footer { text-align: center; padding: 30px 0 20px; color: var(--tg-theme-hint-color, #999); font-size: 12px; }
         .footer a { color: var(--tg-theme-button-color, #3390ec); text-decoration: none; }
         
-        /* Status */
         .status {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 12px;
-            padding: 4px 10px;
-            background: #4CAF50;
-            color: #fff;
-            border-radius: 12px;
-            margin-top: 8px;
+            display: inline-flex; align-items: center; gap: 4px;
+            font-size: 12px; padding: 4px 10px; border-radius: 12px;
+            background: #4CAF50; color: #fff; margin-top: 8px;
         }
         .status.coming { background: #FF9800; }
-        
-        /* Back button hint */
-        .back-hint {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--tg-theme-secondary-bg-color, #fff);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            color: var(--tg-theme-hint-color, #999);
-            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-            display: none;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <div class="header">
             <h1>🎮 Мои приложения</h1>
             <p>Выберите игру или утилиту</p>
         </div>
 
-        <!-- Игры -->
         <div class="category">🎲 Игры</div>
         
         <!-- Математический тренажёр -->
@@ -149,49 +100,21 @@
             </div>
         </div>
 
-        <!-- Заглушка для будущей игры -->
-        <div class="app-card disabled" onclick="showComingSoon()">
-            <div class="app-icon">🧩</div>
-            <div class="app-info">
-                <div class="app-title">Викторина</div>
-                <div class="app-desc">Проверь свои знания в разных темах</div>
-            </div>
-            <span class="status coming">Скоро</span>
-        </div>
-
-        <!-- Утилиты -->
         <div class="category">🛠 Утилиты</div>
         
         <div class="app-card disabled" onclick="showComingSoon()">
             <div class="app-icon">🔐</div>
             <div class="app-info">
                 <div class="app-title">Генератор паролей</div>
-                <div class="app-desc">Создавай надёжные пароли за секунду</div>
+                <div class="app-desc">Скоро</div>
             </div>
             <span class="status coming">Скоро</span>
         </div>
 
-        <div class="app-card disabled" onclick="showComingSoon()">
-            <div class="app-icon">📝</div>
-            <div class="app-info">
-                <div class="app-title">To-Do List</div>
-                <div class="app-desc">Список задач с напоминаниями</div>
-            </div>
-            <span class="status coming">Скоро</span>
-        </div>
-
-        <!-- Footer -->
         <div class="footer">
             <p>Сделано с ❤️</p>
-            <p style="margin-top: 8px;">
-                <a href="https://github.com/juvenalshaeffer-art" target="_blank">GitHub</a>
-                ·
-                <a href="#" onclick="openBot(); return false;">Бот</a>
-            </p>
         </div>
     </div>
-
-    <div class="back-hint" id="backHint">← Свайпните вправо или нажмите «Назад»</div>
 
     <script>
         // Инициализация Telegram Web App
@@ -199,29 +122,15 @@
         if (tg) {
             tg.expand();
             tg.ready();
-            
-            // Показываем подсказку про навигацию назад
-            setTimeout(() => {
-                document.getElementById('backHint').style.display = 'block';
-                setTimeout(() => {
-                    document.getElementById('backHint').style.display = 'none';
-                }, 4000);
-            }, 1000);
         }
 
         /**
-         * Открывает приложение внутри Telegram Web App
-         * @param {string} url - ссылка на приложение
+         * Открывает приложение внутри Telegram
+         * Используем window.location.href — это работает в WebView
          */
         function openApp(url) {
-            if (tg) {
-                // Для навигации внутри того же домена используем location.href
-                // Это сохраняет сессию Web App и не открывает внешний браузер
-                tg.location.href = url;
-            } else {
-                // Fallback для обычного браузера
-                window.location.href = url;
-            }
+            // Просто меняем location — это останется в том же WebView
+            window.location.href = url;
         }
 
         /**
@@ -235,22 +144,8 @@
             }
         }
 
-        /**
-         * Открывает бота (для ссылки в футере)
-         */
-        function openBot() {
-            if (tg) {
-                // Открываем бота в чате
-                tg.openTelegramLink('https://t.me/YOUR_BOT_USERNAME');
-            } else {
-                window.open('https://t.me/YOUR_BOT_USERNAME', '_blank');
-            }
-        }
-
-        // Блокируем стандартное поведение для disabled-карточек
-        document.querySelectorAll('.app-card.disabled').forEach(card => {
-            card.addEventListener('click', (e) => e.preventDefault());
-        });
+        // Предотвращаем выделение текста при тапах
+        document.addEventListener('touchstart', function() {}, {passive: true});
     </script>
 </body>
 </html>
