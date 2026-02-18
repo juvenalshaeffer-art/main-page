@@ -14,6 +14,7 @@
             min-height: 100vh;
             padding: 16px;
             line-height: 1.5;
+            cursor: default;
         }
         .container { max-width: 400px; margin: 0 auto; }
         
@@ -38,8 +39,13 @@
             color: inherit;
             transition: transform 0.2s, box-shadow 0.2s;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            cursor: pointer;
+            user-select: none;
         }
         .app-card:active { transform: scale(0.98); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+        .app-card.disabled { opacity: 0.6; cursor: not-allowed; }
+        .app-card.disabled:active { transform: none; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        
         .app-icon {
             width: 48px;
             height: 48px;
@@ -96,6 +102,21 @@
             margin-top: 8px;
         }
         .status.coming { background: #FF9800; }
+        
+        /* Back button hint */
+        .back-hint {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--tg-theme-secondary-bg-color, #fff);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: var(--tg-theme-hint-color, #999);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -110,54 +131,54 @@
         <div class="category">🎲 Игры</div>
         
         <!-- Математический тренажёр -->
-        <a href="https://juvenalshaeffer-art.github.io/math/" class="app-card" target="_blank">
+        <div class="app-card" onclick="openApp('https://juvenalshaeffer-art.github.io/math/')">
             <div class="app-icon">🧮</div>
             <div class="app-info">
                 <div class="app-title">Математический тренажёр</div>
                 <div class="app-desc">Решай примеры на время, повышай уровень</div>
             </div>
             <span class="app-tag">NEW</span>
-        </a>
+        </div>
 
         <!-- Тамагочи -->
-        <a href="https://juvenalshaeffer-art.github.io/tamagotchi/" class="app-card" target="_blank">
+        <div class="app-card" onclick="openApp('https://juvenalshaeffer-art.github.io/tamagotchi/')">
             <div class="app-icon">🐱</div>
             <div class="app-info">
                 <div class="app-title">Тамагочи с котиками</div>
                 <div class="app-desc">Корми, играй, заботься о питомце</div>
             </div>
-        </a>
+        </div>
 
         <!-- Заглушка для будущей игры -->
-        <a href="#" class="app-card" onclick="return false;">
+        <div class="app-card disabled" onclick="showComingSoon()">
             <div class="app-icon">🧩</div>
             <div class="app-info">
                 <div class="app-title">Викторина</div>
                 <div class="app-desc">Проверь свои знания в разных темах</div>
             </div>
             <span class="status coming">Скоро</span>
-        </a>
+        </div>
 
         <!-- Утилиты -->
         <div class="category">🛠 Утилиты</div>
         
-        <a href="#" class="app-card" onclick="return false;">
+        <div class="app-card disabled" onclick="showComingSoon()">
             <div class="app-icon">🔐</div>
             <div class="app-info">
                 <div class="app-title">Генератор паролей</div>
                 <div class="app-desc">Создавай надёжные пароли за секунду</div>
             </div>
             <span class="status coming">Скоро</span>
-        </a>
+        </div>
 
-        <a href="#" class="app-card" onclick="return false;">
+        <div class="app-card disabled" onclick="showComingSoon()">
             <div class="app-icon">📝</div>
             <div class="app-info">
                 <div class="app-title">To-Do List</div>
                 <div class="app-desc">Список задач с напоминаниями</div>
             </div>
             <span class="status coming">Скоро</span>
-        </a>
+        </div>
 
         <!-- Footer -->
         <div class="footer">
@@ -165,18 +186,71 @@
             <p style="margin-top: 8px;">
                 <a href="https://github.com/juvenalshaeffer-art" target="_blank">GitHub</a>
                 ·
-                <a href="https://t.me/YOUR_BOT" target="_blank">Бот</a>
+                <a href="#" onclick="openBot(); return false;">Бот</a>
             </p>
         </div>
     </div>
 
+    <div class="back-hint" id="backHint">← Свайпните вправо или нажмите «Назад»</div>
+
     <script>
         // Инициализация Telegram Web App
-        if (window.Telegram?.WebApp) {
-            const tg = Telegram.WebApp;
+        const tg = window.Telegram?.WebApp;
+        if (tg) {
             tg.expand();
             tg.ready();
+            
+            // Показываем подсказку про навигацию назад
+            setTimeout(() => {
+                document.getElementById('backHint').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('backHint').style.display = 'none';
+                }, 4000);
+            }, 1000);
         }
+
+        /**
+         * Открывает приложение внутри Telegram Web App
+         * @param {string} url - ссылка на приложение
+         */
+        function openApp(url) {
+            if (tg) {
+                // Для навигации внутри того же домена используем location.href
+                // Это сохраняет сессию Web App и не открывает внешний браузер
+                tg.location.href = url;
+            } else {
+                // Fallback для обычного браузера
+                window.location.href = url;
+            }
+        }
+
+        /**
+         * Показывает сообщение "Скоро"
+         */
+        function showComingSoon() {
+            if (tg) {
+                tg.showAlert('🚧 Эта функция скоро появится!');
+            } else {
+                alert('🚧 Эта функция скоро появится!');
+            }
+        }
+
+        /**
+         * Открывает бота (для ссылки в футере)
+         */
+        function openBot() {
+            if (tg) {
+                // Открываем бота в чате
+                tg.openTelegramLink('https://t.me/YOUR_BOT_USERNAME');
+            } else {
+                window.open('https://t.me/YOUR_BOT_USERNAME', '_blank');
+            }
+        }
+
+        // Блокируем стандартное поведение для disabled-карточек
+        document.querySelectorAll('.app-card.disabled').forEach(card => {
+            card.addEventListener('click', (e) => e.preventDefault());
+        });
     </script>
 </body>
 </html>
